@@ -1,0 +1,64 @@
+.App {
+    text-align: center;
+    background-color: #44C746;
+  }
+
+.App-logo {
+    height: 20vmin;
+    pointer-events: none;
+  }
+
+.Registration-container {
+    background-color: #44C746;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Registration-container input {
+        background-color: #44C746;
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+
+    label {
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+
+
+    }
+
+    .Registration-container h1{
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 50px;
+    }
+
+    .Registration-container h3 {
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+    }
+
+    .Submit-button {
+        margin: 1em;
+    }
+
+    

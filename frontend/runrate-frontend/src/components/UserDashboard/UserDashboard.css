@@ -1,0 +1,103 @@
+.Profile-header {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Profile-header .App-logo {
+    height: 10vmin;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1em;
+}
+
+ol {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    font-size:18px;
+    height:2em;
+    line-height:2em;
+    text-align:center;
+    width: 50%;
+  }
+
+  /* wygląd wszystkich elementów - a - znajdujących się w elemencie - ol */
+  ol a {
+    display:block;
+    text-decoration:none;
+    color:white;
+    padding:0 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-size: 25px;
+  }
+
+  /* wygląd elementów - li - wszystkich dzieci elementu - ol */
+  ol > li {
+    float:left;
+    width:150px;
+    margin-left:1px;
+    background-color:#8CFF74;
+    height:2em;
+    width: 100%;
+  }
+
+  /* wygląd elementu - li - pierwszego dziecka elementu - ol */
+  ol > li:first-child {
+    margin-left:0;
+  }
+
+  /* wygląd elementów - li - wszystkich dzieci elementu - ol - po najechaniu kursorem myszki na element - li */
+  ol > li:hover {
+    background-color: #8CFF74;
+  }
+
+  /* wygląd elementu - a - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
+  ol > li:hover > a {
+    color:white;
+  }
+
+  /* wygląd elementu - ul - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
+  ol > li:hover > ul {
+    display:block;
+  }
+
+  /* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
+
+  /* wygląd głównych rozwijanych elementów - ul */
+  ol > li > ul {
+    display:none;
+    list-style-type:none;
+    padding:0;
+    margin:0;
+  }
+
+  /* wygląd elementu - li - w części rozwijanej */
+  ol > li > ul > li {
+    position:relative;
+    background-color:#8CFF74;
+  }
+
+  /* wygląd elementu - a - w części rozwijanej */
+  ol > li > ul > li > a {
+    border-top:1px solid #FFF;
+  }
+
+  /* wygląd elementu - li - w części rozwijanej, po najechaniu kursorem myszki na dany element - li */
+  ol > li > ul > li:hover {
+    background-color:#44C746;
+  }
+
+  /* wygląd elementu - a - w części rozwijanej, po najechaniu kursorem myszki na element - li */
+  ol > li > ul > li:hover > a {
+    color:white;
+  }

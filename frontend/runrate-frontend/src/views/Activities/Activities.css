@@ -1,0 +1,34 @@
+.App {
+    text-align: center;
+    background-color: #44C746;
+  }
+
+  .App-container {
+    background-color: #44C746;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .UserActivities-container .Activity-container {
+    width: auto;
+    height: auto;
+  }
+
+  .UserActivities-container {
+    background-color: #44C746;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  
