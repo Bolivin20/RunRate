@@ -2,101 +2,77 @@ package com.example.runrate.entities;
 
 import com.example.runrate.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name="USERS")
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_user", nullable = false)
-    private Long idUser;
-
-    @Column(name = "name", nullable = false)
+    @GeneratedValue
+    private Long id;
     private String name;
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "password", nullable = false)
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private Role role;
-
-    @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
+
+    @OneToMany(mappedBy = "user")
     private List<ProfileDetail> profileDetails;
 
-    public User() {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public User(String name, String email, String password, Role role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.createdAt = LocalDate.now();
-    }
-
-    public Long getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public Role getRole() {
-        return role;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public LocalDate getCreatedAt() {
-        return createdAt;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
-    public List<ProfileDetail> getProfileDetails() {
-        return profileDetails;
-    }
-
-    public void setProfileDetails(List<ProfileDetail> profileDetails) {
-        this.profileDetails = profileDetails;
-    }
 }
+
