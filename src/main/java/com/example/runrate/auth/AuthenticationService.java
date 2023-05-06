@@ -4,10 +4,12 @@ package com.example.runrate.auth;
 
 
 import com.example.runrate.auth.AuthenticationRequest;
+import com.example.runrate.entities.ProfileDetail;
 import com.example.runrate.entities.Token;
 import com.example.runrate.enums.Role;
 import com.example.runrate.entities.User;
 import com.example.runrate.enums.TokenType;
+import com.example.runrate.repositories.ProfileDetailRepo;
 import com.example.runrate.repositories.TokenRepo;
 import com.example.runrate.repositories.UserRepo;
 import com.example.runrate.security.JwtService;
@@ -22,6 +24,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -31,15 +35,18 @@ public class AuthenticationService {
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+    private final ProfileDetailRepo profileDetailRepo;
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = User.builder()
             .name(request.getName())
-        .email(request.getEmail())
-        .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.USER)
+            .email(request.getEmail())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .role(Role.USER)
+            .createdAt(LocalDate.now())
         .build();
     var savedUser = repository.save(user);
+    profileDetailRepo.save(new ProfileDetail(savedUser));
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
     saveUserToken(savedUser, jwtToken);

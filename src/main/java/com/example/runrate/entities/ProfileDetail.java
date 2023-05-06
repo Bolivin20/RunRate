@@ -20,11 +20,13 @@ public class ProfileDetail {
     private LocalDate updatedAt;
     private double points;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 
-    @OneToOne(mappedBy = "profileDetail")
-    private Training training;
-
+    public ProfileDetail(User user) {
+        this.user = user;
+        this.updatedAt = LocalDate.now();
+        this.points = 0;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.runrate.repositories;
 
 import com.example.runrate.entities.Token;
+import com.example.runrate.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ public interface TokenRepo extends JpaRepository<Token, Long> {
     List<Token> findAllValidTokenByUser(Long id);
 
     Optional<Token> findByToken(String token);
+
 }
