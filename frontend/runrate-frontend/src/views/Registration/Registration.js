@@ -1,28 +1,133 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from '../../resources/img/logo.svg';
+import { useNavigate } from "react-router-dom";
 import './Registration.css';
 
 function Registration() {
+    const [email, setEmail]=useState("");
+    const [password, setPassword]=useState("");
+    const [confirmPassword, setConfirmPassword]=useState("");
+    const [name, setName]=useState("");
+    const navigate = useNavigate();
+    const [validPassword, setValidPassword]=useState(false);
+    //const [blankPassword, setBlankPassword]=useState(true);
+    //const [blankEmail, setBlankEmail]=useState(true); 
+    const [validEmail, setValidEmail]=useState(false);
+    const [validName, setValidName]=useState(false);
+    const [errorMsg, setErrorMsg]=useState("");
+
+
+    useEffect(()=>
+    {   if(name.trim().length !== 0)
+          { 
+            //setBlankEmail(false);
+            setValidName(true);
+          }
+          else
+          {
+            //setBlankEmail(true);
+            setValidName(false);
+          }
+         
+    }, [name]);
+
+    useEffect(()=>
+    {   if(email.trim().length !== 0)
+          { 
+            //setBlankEmail(false);
+            setValidEmail(email.includes("@") && email.includes("."));
+          }
+          else
+          {
+            //setBlankEmail(true);
+            setValidEmail(false);
+          }
+         
+    }, [email]);
+
+    useEffect(()=>
+    {
+      if(password.trim().length !== 0 && confirmPassword.trim().length !== 0)
+        {
+          //setBlankPassword(false);
+          if( password===confirmPassword) {
+            setValidPassword(true);
+          }
+          else
+            setValidPassword(false);
+  
+        }
+    },[password, confirmPassword]);
+
+    useEffect(() => {
+        console.log(validPassword);
+        console.log(validEmail);
+        if(!validName)
+        setErrorMsg("Name can't be blank.");
+        else if(!validEmail)
+        setErrorMsg("Wrong email format.");
+        else if(!validPassword)
+        setErrorMsg("Passwords don't match.");
+        else
+        setErrorMsg("");
+      }, [validPassword, validEmail, validName]);
+
+    const sendRegisterRequest=(event) => 
+  {
+      event.preventDefault();
+      const data = { 
+        name: name,
+        email:email,
+        password:password,
+      };
+    
+      fetch("http://localhost:8080/api/auth/register", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        //console.log(response);
+        return response.json();
+        }).then((data) => {
+            localStorage.setItem("token", data.access_token);
+            navigate("/user/profile"); 
+        }).catch((error) => {
+            console.log("Error: " + error);
+        });
+        //navigate("/api/auth/authenticate");
+    };
     return (
     <div className="App">
         <header className="Registration-container">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Registration</h1>
-        <form>
+        <form onSubmit={sendRegisterRequest}>
+            <label>
+            <h3>Username:</h3>
+            <input type="text" name="name" value = {name} onChange={(event)=>setName(event.target.value)}/>
+            </label>
             <label>
             <h3>Email:</h3>
-            <input type="text" name="email" />
+            <input type="text" name="email" value = {email} onChange={(event)=>setEmail(event.target.value)} />
             </label>
             <label>
             <h3>Password:</h3>
-            <input type="text" name="password" />
+            <input type="password" name="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
             </label>
             <label>
             <h3>Confirm password:</h3>
-            <input type="text" name="confirmPassword" />
+            <input type="password" name="confirmPassword"value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
             </label>
+            <div className="Error-message">
+            <p>{errorMsg} </p>
+            </div>
             <div className= "Submit-button">
-            <input type="submit" value="Submit" />
+            <button disabled={!validEmail || !validPassword || !validName ? true : false} id="submit" type="submit" onChange={(event)=>setErrorMsg(event.target.value)}>submit</button>
             </div>
         </form>
         </header>   

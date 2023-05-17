@@ -1,18 +1,22 @@
-import React from "react";
-import "./Activity.css";
+import React from 'react';
+import './Activity.css';
 
-
-const Activity = () => {
-    return (
-        <div className="Activity-container">
-                <h4>Distance: 10km</h4>
-                <h4>Time: 1h 20min</h4>
-                <h4>Date: 20.02.2021</h4>
-                <h4>Elevation: 120m</h4>
-                <h4>Points: 5pt</h4>
+function Activity({ trainingDate, hours, minutes, distance, elevation, trainingPoints }) {
+  return (
+    <div className="Activity">
+      <div className="Activity-details">
+        <p>{trainingDate}</p>
+        <div className="Activity-data">
+          <p>Time: {hours}h {minutes}min</p>
+          <p>Distance: {distance}km</p>
+          <p>Elevation: {elevation}m</p>
         </div>
-    );
-    }
+      </div>
+      <div className="Activity-points">
+        <p>{trainingPoints} points</p>
+      </div>
+    </div>
+  );
+}
 
 export default Activity;
-

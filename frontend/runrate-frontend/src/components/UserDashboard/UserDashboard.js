@@ -2,7 +2,9 @@ import React from "react";
 import logo from "../../resources/img/logo.svg";
 import "./UserDashboard.css";
 
-
+const handleLogout = () => {
+  localStorage.removeItem("token");
+};
 
 const UserDashboard = () => {
     return (
@@ -16,8 +18,8 @@ const UserDashboard = () => {
       <li><a>Options</a>
         <ul>
           <li><a href="/add-activity">Add new run</a></li>
-          <li><a href="activities">Show activities</a></li>
-          <li><a href="/">Logout</a></li>
+          <li><a href="/activities">Show activities</a></li>
+          <li><a href="/" onClick={handleLogout}>Logout</a></li>
         </ul>
       </li>
         </ol>

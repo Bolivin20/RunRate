@@ -4,6 +4,7 @@ import com.example.runrate.entities.User;
 import com.example.runrate.repositories.ProfileDetailRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("user/profile")
+@CrossOrigin
 public class ProfileController {
     private ProfileDetailRepo profileDetailRepo;
 

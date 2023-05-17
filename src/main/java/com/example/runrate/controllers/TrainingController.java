@@ -5,9 +5,14 @@ import com.example.runrate.entities.Training;
 import com.example.runrate.entities.User;
 import com.example.runrate.repositories.ProfileDetailRepo;
 import com.example.runrate.repositories.TrainingRepo;
+import com.example.runrate.security.JwtAuthenticationFilter;
+import com.example.runrate.security.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/profile")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TrainingController {
 
     private ProfileDetailRepo profileDetailRepo;
@@ -27,12 +33,25 @@ public class TrainingController {
         this.trainingRepo = trainingRepo;
     }
 
-    @GetMapping("/trainings")
+    @GetMapping()
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getTrainings() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        User user = (User) authentication.getPrincipal();
+
+        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         List<Training> trainings = trainingRepo.findAllTrainingsByIdUser(user.getId());
-       return ResponseEntity.ok(trainings);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(trainings);
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<?> addTraining(@RequestBody TrainingRequest request) {

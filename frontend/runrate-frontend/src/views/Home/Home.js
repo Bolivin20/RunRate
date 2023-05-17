@@ -14,10 +14,10 @@ function Home() {
       <p>Overcome difficulties, improve yourself.</p>
 
       <div className="App-button-container">    
-      <Link to="/login">
+      <Link to="/api/auth/authenticate">
       <button className="App-button">Sign in</button>
       </Link>
-      <Link to="/registration">
+      <Link to="api/auth/register">
       <button className="App-button">Sign up</button>
       </Link>
       </div>
