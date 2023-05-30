@@ -1,6 +1,7 @@
 package com.example.runrate.repositories;
 
 import com.example.runrate.entities.User;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +22,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
         //void deleteById(Long id);
 
         void delete(User user);
+
+        @Transactional
+        @Query(nativeQuery = true, value = "SELECT name FROM users WHERE id= :id")
+        String findNameById(@Param("id") Long id);
 
        // @Modifying
        // @Query("DELETE FROM User u WHERE u.id = :id")
