@@ -58,7 +58,17 @@
     }
 
     .Submit-button {
-        margin: 1em;
+        margin: 2em;
     }
+
+    .Submit-button button {
+        background-color: #44C746;
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        font-size: 30px;
+    }
+
+    
 
     

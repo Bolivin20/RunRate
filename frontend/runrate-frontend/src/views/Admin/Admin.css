@@ -1,0 +1,27 @@
+.Admin-container {
+    background-color: #44C746;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+.Admin-container p {
+    color: black;
+  }
+  
+  .Admin-content {
+    margin-top: 20px;
+  }
+  
+  .Training-details {
+    margin-bottom: 20px;
+  }
+  
+  .Training-details p {
+    margin: 5px;
+  }
+  

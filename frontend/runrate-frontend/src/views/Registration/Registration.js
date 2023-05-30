@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import './Registration.css';
 
 function Registration() {
+  useEffect(() => {
+    document.title = 'RunRate';
+  }, []);
     const [email, setEmail]=useState("");
     const [password, setPassword]=useState("");
     const [confirmPassword, setConfirmPassword]=useState("");
     const [name, setName]=useState("");
     const navigate = useNavigate();
     const [validPassword, setValidPassword]=useState(false);
-    //const [blankPassword, setBlankPassword]=useState(true);
-    //const [blankEmail, setBlankEmail]=useState(true); 
     const [validEmail, setValidEmail]=useState(false);
     const [validName, setValidName]=useState(false);
     const [errorMsg, setErrorMsg]=useState("");
@@ -20,12 +21,10 @@ function Registration() {
     useEffect(()=>
     {   if(name.trim().length !== 0)
           { 
-            //setBlankEmail(false);
             setValidName(true);
           }
           else
           {
-            //setBlankEmail(true);
             setValidName(false);
           }
          
@@ -34,12 +33,10 @@ function Registration() {
     useEffect(()=>
     {   if(email.trim().length !== 0)
           { 
-            //setBlankEmail(false);
             setValidEmail(email.includes("@") && email.includes("."));
           }
           else
           {
-            //setBlankEmail(true);
             setValidEmail(false);
           }
          
@@ -49,7 +46,6 @@ function Registration() {
     {
       if(password.trim().length !== 0 && confirmPassword.trim().length !== 0)
         {
-          //setBlankPassword(false);
           if( password===confirmPassword) {
             setValidPassword(true);
           }
@@ -91,7 +87,6 @@ function Registration() {
         if (!response.ok) {
           throw new Error(response.status);
         }
-        //console.log(response);
         return response.json();
         }).then((data) => {
             localStorage.setItem("token", data.access_token);

@@ -8,6 +8,7 @@ import Registration from './views/Registration/Registration';
 import Profile from './views/Profile/Profile';
 import Activities from './views/Activities/Activities';
 import AddActivity from './views/AddActivity/AddActivity';
+import Admin from './views/Admin/Admin';
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/add-activity',
     element: <AddActivity />,
+  },
+  {
+    path: '/admin',
+    element: <Admin />,
   },
 
 ]);

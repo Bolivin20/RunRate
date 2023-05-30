@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import UserDashboard from "../../components/UserDashboard/UserDashboard";
 import "./AddActivity.css";
 import { useNavigate } from "react-router-dom";
 
 
 function AddActivity() {
+  useEffect(() => {
+    document.title = 'RunRate';
+  }, []);
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [distance, setDistance] = useState("");
@@ -29,11 +32,9 @@ function AddActivity() {
         }),
       });
       if (res.ok) {
-        // handle success
         console.log("Activity added successfully");
         navigate("/user/profile");
       } else {
-        // handle error
         console.error("Failed to add activity");
       }
     } catch (err) {

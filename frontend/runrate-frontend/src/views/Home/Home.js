@@ -1,11 +1,15 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
 import logo from '../../resources/img/logo.svg';
 import './Home.css';
 
 
 
 function Home() {
+  useEffect(() => {
+    document.title = 'RunRate';
+  }, []);
+
     return (
     <div className="App">
       <header className="App-header">

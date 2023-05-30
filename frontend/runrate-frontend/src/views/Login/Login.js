@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import logo from '../../resources/img/logo.svg';
 import './Login.css';
 
 
 function Login() {
-  
+  useEffect(() => {
+    document.title = 'RunRate';
+  }, []);
     const [email, setEmail]=useState("");
     const [password, setPassword]=useState("");
     const [errorMsg, setErrorMsg]=useState("");

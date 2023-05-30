@@ -29,7 +29,7 @@ const UserDashboard = () => {
       })
       .then((data) => {
         setPoints(data.points);
-        setLevel(Math.floor(points / 10) + 1);
+        setLevel((Math.floor(points / 10)) + 1);
       })
       .catch((error) => {
         console.error(error);

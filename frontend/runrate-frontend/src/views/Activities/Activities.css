@@ -31,4 +31,10 @@
     color: white;
   }
 
+  @media (max-width: 480px) {
+    .UserActivities-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   
