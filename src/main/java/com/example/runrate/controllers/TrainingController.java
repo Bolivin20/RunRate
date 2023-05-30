@@ -42,9 +42,6 @@ public class TrainingController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         User user = (User) authentication.getPrincipal();
-
-        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         List<Training> trainings = trainingRepo.findAllTrainingsByIdUser(user.getId());
 
         return ResponseEntity.ok()

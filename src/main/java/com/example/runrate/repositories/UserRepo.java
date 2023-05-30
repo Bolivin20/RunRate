@@ -17,18 +17,11 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
         Optional<User> findByEmail(String email);
 
-        User findUserById(Long id);
-
-        //void deleteById(Long id);
-
         void delete(User user);
 
         @Transactional
         @Query(nativeQuery = true, value = "SELECT name FROM users WHERE id= :id")
         String findNameById(@Param("id") Long id);
 
-       // @Modifying
-       // @Query("DELETE FROM User u WHERE u.id = :id")
-       // void deleteUserById(@Param("id") Long id);
 
 }
